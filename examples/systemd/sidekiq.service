@@ -33,6 +33,9 @@ User=deploy
 Group=deploy
 UMask=0002
 
+# Allow Sidekiq to gracefully stop when asked to shut down
+ExecStop=/usr/local/bin/bundle exec sidekiqctl stop tmp/pids/sidekiq-%i.pid {{sidekiq_timeout}}
+
 # Greatly reduce Ruby memory fragmentation and heap usage
 # https://www.mikeperham.com/2018/04/25/taming-rails-memory-bloat/
 Environment=MALLOC_ARENA_MAX=2
